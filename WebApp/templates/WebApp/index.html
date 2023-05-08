@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %} 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+        <title>SheDrive</title> 
+        
+
+    <link  rel="icon" href="img/logoo.png" type="image/png">
+
+    <!-- Compiled and minified CSS -->
+    <link href="{% static 'WebApp/css/index.css ' %}" rel="stylesheet">
+
+
+    <!-- Import Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ysabeau:ital,wght@0,100;1,600&display=swap" rel="stylesheet">
+
+    <!-- Import Icon Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'WebApp/vendor/fontawesome-free/css/all.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body style="background-color: #e6dad1;">
+    <div class="slider__warpper">
+        <div class="flex__container flex--pikachu flex--active" data-slide="1">
+            <div class="flex__item flex__item--left">
+                <div class="flex__content">
+                    <p class="text--sub">Porque tu seguridad nos importa</p>
+                    <h1 class="text--big">SheDrive</h1>
+                    <p class="text--normal">¡Viaja con seguridad y confianza, con conductoras que te entienden! </p>
+                </div>
+                <p class="text__background">SheDrive</p>
+            </div>
+            <div class="flex__item flex__item--right">
+
+                <div class="form-structor">
+                    <div class="signup">
+                        <h2 class="form-title" id="signup">Registro</h2>
+                        <form method="POST">
+                            {% csrf_token %}
+                        <div class="form-holder">
+                            {{form.nombre}}
+                            {{form.identificacion}}
+                            {{form.celular}}
+                            {{form.correo}}
+                            {{form.contraseña}}
+                        </div>
+                        <button class="submit-btn">Registro</button>
+                    </form>
+                        <center>
+                            <div class="cond">
+                                <a class="link-conductoras" href="{% url 'signinCond' %}">¿Quieres ser una de nuestras conductoras?</a>
+                            </div>
+                        </center>
+                    </div>
+                    <div class="login slide-up">
+                        <div class="center">
+                            <h2 class="form-title" id="login">Inicio</h2>
+                            <form method="POST">
+                            
+                                
+                                <div class="form-holder">
+                                    <input type="number" class="input" placeholder="Núm. identificación" name="identificacion"/>
+                                        <div class="input-group">
+                                            <input type="password" name="contrasena" id="contrasena" class="input"
+                                            placeholder="Contraseña" name="password" />
+
+                                            <button class="ojito" type="button" onclick="mostrarContrasena()"><i
+                                                class="fa-regular fa-eye fa-beat-fade"></i></button>
+                                         </div>
+                                    </div>
+                                <button class="submit-btn">Inicio</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="{% static 'WebApp/js/index.js ' %}"></script>
+
+
+</body>
+</html>
