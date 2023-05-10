@@ -47,21 +47,16 @@
         <section class="card">
             <div class="text-content">
                 <h3 class="title-conductoras">¡Registro de conductoras!</h3>
-                <div class="form-holder">
+                
                     <form method="POST">
-                        <input type="text" class="input" placeholder="Nombre" />
-                        <input type="number" class="input" placeholder="Núm. Identificación" />
-                        <input type="number" class="input" placeholder="Teléfono" />
-                        <input type="email" class="input" placeholder="Email" />
-                        <div class="group">
-                            <input type="password" name="password" id="password" class="input"
-                                placeholder="Contraseña" />
-
-                            <button class="ojito" type="button" onclick="mostrarContrasena()"><i class="fa-regular fa-eye fa-beat-fade"></i></button>
+                        {% csrf_token %}
+                        <div class="form-holder">
+                            {{formRegistroCond.as_table}}
                         </div>
+                        <button class="submit-btn" type="submit" id="submit">¡Registro!</button>
                     </form>
-                </div>
-                <button class="submit-btn">¡Registrar!</button>
+            
+                
             </div>
             <div class="visual">
                 <img src="{% static 'WebApp/img/sonrisa.jpeg ' %}"

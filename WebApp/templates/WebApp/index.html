@@ -45,13 +45,9 @@
                         <form method="POST">
                             {% csrf_token %}
                         <div class="form-holder">
-                            {{form.nombre}}
-                            {{form.identificacion}}
-                            {{form.celular}}
-                            {{form.correo}}
-                            {{form.contraseña}}
+                            {{formRegistro.as_table}}
                         </div>
-                        <button class="submit-btn">Registro</button>
+                        <button class="submit-btn" type="submit" id="submit">Registro</button>
                     </form>
                         <center>
                             <div class="cond">
