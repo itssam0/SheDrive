@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import logout
 from django.contrib import messages
 from .models import *
 from .forms import *
 
 def index(request):
-
     if request.method == 'POST':
         listUser = Usuaria.objects.all()
         Registro = request.POST
@@ -28,32 +28,22 @@ def index(request):
             else:
                 usuaria= Usuaria(nombre_usu=nombre, identificacion_usu=identificacion, celular= celular, correo= correo, contraseña= contraseña)
                 usuaria.save() 
-                return redirect('pasajera')
+                return redirect('pasajera', identificacion=usuaria.identificacion_usu)
         else:
-            identUser = []
-            passworkUser = []
-            for i in listUser:
-                identUser.append(i.identificacion_usu)
-                passworkUser.append(i.contraseña)
+            identificacion_user = Registro.get('identificacionLog')
+            contraseña_user = Registro.get('contrasenaLog')
 
-            identificacion_user = Registro.get("identificacionLog")
-            contraseña_user= Registro.get("contrasenaLog")
-        
-            for j in  identUser:
-                if identificacion_user == str(j):
-                    passwork = Usuaria.objects.get(identificacion_usu=j).contraseña
-                    if passwork == contraseña_user:
-                        return pasajera(request)
-                    else:
-                        messages.success(request, "Usuaria o contraseña incorrectas")
-                        print("Usuaria o contraseña incorrectas")
-                else:
-                    messages.success(request, "Usuaria o contraseña incorrectas")
-                    print("Usuaria o contraseña incorrectas")
+            try:
+                usuaria = Usuaria.objects.get(identificacion_usu=identificacion_user, contraseña=contraseña_user)
+                return redirect('pasajera', identificacion=usuaria.identificacion_usu)
+            except Usuaria.DoesNotExist:
+                messages.error(request, "Usuaria o contraseña incorrectas")
         
     return render(request, 'index.html')
 
-
+def logout_view(request):
+    logout(request)
+    return redirect('index')
 
 def signinCond(request):
     if request.method == 'POST':
@@ -77,7 +67,7 @@ def signinCond(request):
 
 
 
-def pasajera(request):
-    objetos= Usuaria.objects.all()
-    Info ={'objetos': objetos}
-    return render(request, "pasajera.html ", Info)
+def pasajera(request, identificacion):
+
+    usuaria = Usuaria.objects.get(identificacion_usu=identificacion)
+    return render(request, "pasajera.html ",{'usuaria': usuaria})
