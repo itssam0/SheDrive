@@ -26,6 +26,8 @@
     <link href="{% static 'WebApp/vendor/fontawesome-free/css/all.css' %}" rel="stylesheet" type="text/css">
 </head>
 
+
+
 <body style="background-color: #e6dad1;">
     <div class="slider__warpper">
         <div class="flex__container flex--pikachu flex--active" data-slide="1">
@@ -43,9 +45,19 @@
                     <div class="signup">
                         <h2 class="form-title" id="signup">Registro</h2>
                         <form method="POST">
-                            {% csrf_token %}
+                        {% csrf_token %}
                         <div class="form-holder">
-                            {{formRegistro.as_table}}
+                            <input type="text" class="input" placeholder="Nombre" name="Nombre" />
+                                <input type="number" class="input" placeholder="Núm. Identificación" name="identificacion" />
+                                <input type="number" class="input" placeholder="Celular"  name="celular"/>
+                                <input type="email" class="input" placeholder="Email" name="correo"/>
+                                <div class="input-group">
+                                    <input type="password" name="password" id="password" class="input"
+                                        placeholder="Contraseña" />
+
+                                    <button class="ojito" type="button" onclick="mostrarContrasena()"><i
+                                            class="fa-regular fa-eye fa-beat-fade"></i></button>
+                    </div>
                         </div>
                         <button class="submit-btn" type="submit" id="submit">Registro</button>
                     </form>
@@ -59,19 +71,18 @@
                         <div class="center">
                             <h2 class="form-title" id="login">Inicio</h2>
                             <form method="POST">
-                            
-                                
+                                {% csrf_token %}
                                 <div class="form-holder">
-                                    <input type="number" class="input" placeholder="Núm. identificación" name="identificacion"/>
+                                    <input type="number" class="input" placeholder="Núm. identificación" name="identificacionLog"/>
                                         <div class="input-group">
-                                            <input type="password" name="contrasena" id="contrasena" class="input"
-                                            placeholder="Contraseña" name="password" />
+                                            <input type="password" name="contrasenaLog" id="contrasena" class="input"
+                                            placeholder="Contraseña"/>
 
                                             <button class="ojito" type="button" onclick="mostrarContrasena()"><i
                                                 class="fa-regular fa-eye fa-beat-fade"></i></button>
-                                         </div>
+                                        </div>
                                     </div>
-                                <button class="submit-btn">Inicio</button>
+                                <button type="submit" class="submit-btn">Inicio</button>
                             </form>
                         </div>
                     </div>
@@ -82,7 +93,38 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="{% static 'WebApp/js/index.js ' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .swal2-popup {
+            border-radius: 15px !important;
+          }
+        .swal2-popup .swal2-text {
+            font-family: 'Ysabeau', sans-serif !important;
+        }
+        .swal2-confirm {
+            background-color: #9d5a4d !important;
+            border-color: transparent !important;
+            border-radius: 15px !important;
+            font-family: 'Ysabeau', sans-serif !important;
+            font-weight: 700;
+        }
+            
+          }
+      </style>
 
+{% if messages %}
+    {% for m in messages %}
+       <script> 
+        Swal.fire({
+            "title": "Advertencia",
+            "text": "{{m}}",
+            "icon": "warning",
+            "showCloseButton": "true",
+
+        })
+       </script>
+    {% endfor %}
+{% endif%}
 
 </body>
 </html>

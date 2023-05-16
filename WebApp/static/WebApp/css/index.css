@@ -1,6 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400|Raleway:300);
 
 
+
+
 .flex__container {
   position: absolute;
   top: 0;
@@ -84,7 +86,7 @@
   opacity: 1;
 }
 
-/* Pikachu */
+
 
 .flex--pikachu .flex__item--left {
   background: #9d5a4d;
