@@ -47,13 +47,13 @@ class Usuaria(models.Model):
 
 class Viaje(models.Model):
     id_viaje = models.IntegerField(db_column='Id_viaje', primary_key=True)  
-    identificacion_usu = models.OneToOneField(Usuaria, models.DO_NOTHING, db_column='Identificacion_usu')  
-    identificacion_cond = models.OneToOneField(Conductora, models.DO_NOTHING, db_column='Identificacion_cond')  
+    identificacion_usu = models.ForeignKey('Usuaria', on_delete=models.CASCADE, related_name='viajes')
+    identificacion_cond = models.ForeignKey('Conductora', on_delete=models.CASCADE, related_name='viajes')
     origen = models.CharField(db_column='Origen', max_length=50)  
     destino = models.CharField(db_column='Destino', max_length=50)  
     precio = models.IntegerField(db_column='Precio')  
     distancia = models.IntegerField(db_column='Distancia')  
-    tiempo = models.TimeField(db_column='Tiempo')  
+    tiempo = models.CharField(db_column='Tiempo', max_length=50)  
 
     class Meta:
         db_table = 'viaje'

@@ -29,29 +29,12 @@
     <article>
         <section class="card">
             <div class="text-content">
-                <h3 class="title-conductoras">Información que debes tener presente</h3>
-                <p class="text">Los más importante es tener un carro. No necesariamente debe estar a tu nombre, los requisitos generales del carro son:
-
-                    Debe tener 4 puertas, y excelentes condiciones estéticas y mecánicas.</p>
-                <center>
-                    <button class="flechita" type="button"><i class="fa-solid fa-arrow-down fa-fade"
-                            style="color: #cfc2b7;"></i></button>
-                </center>
-            </div>
-            <div class="visual">
-                <img src="{% static 'WebApp/img/carro.jpeg ' %}"
-                    alt="" />
-            </div>
-        </section>
-
-        <section class="card">
-            <div class="text-content">
-                <h3 class="title-conductoras">¡Registro de carros!</h3>
+                <h3 class="title-conductoras">¡Registro de conductoras!</h3>
                 
                     <form method="POST">
                         {% csrf_token %}
                         <div class="form-holder">
-                            {{formRegistroCarros.as_table}}
+                            {{formRegistroConductoras.as_table}}
                         </div>
                         <button class="submit-btn" type="submit" id="submit">¡Registro!</button>
                     </form>
@@ -59,10 +42,14 @@
                 
             </div>
             <div class="visual">
-                <img src="{% static 'WebApp/img/Hyundai.jpeg ' %}"
+                <img src="{% static 'WebApp/img/sonrisa.jpeg ' %}"
                     alt="" />
             </div>
         </section>
     </article>
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="{% static 'WebApp/js/signupC.js ' %}"></script>
 </body>
 </html>

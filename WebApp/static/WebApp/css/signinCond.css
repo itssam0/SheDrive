@@ -121,7 +121,7 @@ section.card {
     color: #e6dad1;
   }
   section.card .visual {
-    width: 240px;
+    width:  36%;
     height: 100%;
     position: absolute;
     top: -24px;

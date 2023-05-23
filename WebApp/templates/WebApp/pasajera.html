@@ -25,39 +25,128 @@
 </head>
 
 <body style="background-color: #e6dad1;">
-    <!-- Modal -->
+
+    <!-- Modals -->
+    <!-- Modal Modificar-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Información Perfil</h1>
+                    <h1 class="modal-titleP fs-5 title-modal" id="exampleModalLabel">Modificar información del perfil</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
+                
             <div class="modal-body">
-                <h6>Cuidado con los campos que quieres modificar! </h6>
+                <p class="title-modal">El número de identificación no se puede modificar, para esto debes contactar con nosotras a traves de nuestra sucursales</p>
+                <div class="form-container">
                 <form method="POST">
                     {% csrf_token %}
                     <div class="form-holder">
-                        <input type="text" class="input" placeholder="Nombre" name="Nombre" />
-                            <input type="number" class="input" placeholder="Núm. Identificación" name="identificacion" />
-                            <input type="number" class="input" placeholder="Núm. Celular"  name="celular"/>
-                            <input type="email" class="input" placeholder="Correo" name="correo"/>
-                            <input type="password" name="password" id="password" class="input" placeholder="Contraseña" />
+                        <div class="container">
+                            <div class="row">
+                                {{form.as_table}}
+                                
+                            </div>
+                        </div>
                     </div>
-                </form>
-
             </div>
-
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-secondary cancelar" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary guardar-modificar">Guardar</button>
+            </form>
+        </div>
             </div>
         </div>
     </div>
     </div>
 
 
+    <!-- Modal Legalidad-->
+    <div class="modal fade " id="legalidad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-titleP modal-title fs-5" id="staticBackdropLabel">Legalidad y privacidad</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>En Colombia, existen leyes y regulaciones específicas relacionadas con la discriminación de género, la privacidad y el transporte. Es fundamental buscar asesoramiento legal específico de un abogado colombiano para garantizar el cumplimiento de las leyes y regulaciones vigentes en Colombia.</p>
+                <p>1. No discriminación de género: La Constitución Política de Colombia prohíbe la discriminación por razón de género. Sin embargo, existen excepciones legales que permiten la adopción de medidas afirmativas para la protección de grupos vulnerables, como las mujeres. En este sentido, una aplicación web de transporte exclusivo para mujeres podría justificarse como una medida para garantizar su seguridad y privacidad.</p>
+                <p>2. Protección de datos personales: En Colombia, la Ley Estatutaria 1581 de 2012 regula la protección de datos personales. Esta ley establece que las empresas y organizaciones que recopilan y procesan datos personales deben obtener el consentimiento informado de los individuos y adoptar medidas de seguridad adecuadas para proteger esos datos. Es importante que tu aplicación web cumpla con estas disposiciones y cuente con una política de privacidad clara y accesible para los usuarios.</p>
+                <p>3. Regulación del transporte: El transporte en Colombia está regulado por diferentes normativas a nivel local y nacional. Es importante asegurarse de cumplir con las regulaciones pertinentes para la operación de un servicio de transporte, independientemente de su enfoque exclusivo para mujeres. Esto puede incluir aspectos como licencias de conducir, seguros, revisiones técnicas de los vehículos, entre otros requisitos específicos.</p>    
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Agenda Viaje-->
+    <div class="modal fade" id="agenda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content historial">
+                <div class="modal-header">
+                    <h1 class="modal-titleP fs-5 title-modal" id="exampleModalLabel">Historial de viajes</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+            <div class="modal-body">
+                <div class="form-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Conductora</th>
+                                <th>Identificación</th>
+                                <th>Origen</th>
+                                <th>Destino</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for viaje in viajes %}
+                                <tr>
+                                    <td>{{ viaje.identificacion_cond.nombre_cond }}</td>
+                                    <td>{{ viaje.identificacion_cond.identificacion_cond }}</td>
+                                    <td>{{ viaje.origen }}</td>
+                                    <td>{{ viaje.destino }}</td>
+                                    <td>${{ viaje.precio }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                      </table>
+                </div>
+            <div class="modal-footer">
+        </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal preguntas-->
+    <div class="modal fade " id="preguntas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-titleP modal-title fs-5" id="staticBackdropLabel">Preguntas Frecuentes</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-modal">¡Bienvenidas a la sesión de preguntas frecuentes sobre SheDrive transporte exclusivo para mujeres! A continuación, responderé algunas de las preguntas más comunes relacionadas con nuestra principal función de brindar servicios de transporte en carros particulares con conductoras exclusivamente para mujeres. Si tienes alguna otra pregunta, no dudes en hacerla.</p>
+                <h6 class="modal-titleP">1. ¿Cómo funciona el servicio de transporte exclusivo para mujeres?</h6>
+                <p class="text-modal">Nuestro servicio de transporte exclusivo para mujeres funciona de manera similar a otras aplicaciones de transporte. Las usuarias podrán ingresar a nuestra página, registrarse, y solicitar un viaje a través de la misma. La diferencia radica en que todas nuestras conductoras son mujeres, lo que brinda una opción de transporte segura y cómoda especialmente diseñada para mujeres.</p>
+                <h6 class="modal-titleP">2. ¿Qué medidas de seguridad se implementan en el servicio?</h6>
+                <p class="text-modal">La seguridad es una de nuestras principales preocupaciones. Realizamos una exhaustiva verificación de antecedentes y referencias de todas nuestras conductoras para garantizar la confiabilidad y profesionalismo. Además, todas las usuarias y conductoras tienen la opción de compartir su ubicación y detalles del viaje en tiempo real con familiares o amigos de confianza a través de la aplicación. Asimismo, brindamos un sistema de calificaciones y comentarios para que los usuarios evalúen la experiencia de cada viaje.</p>
+                <h6 class="modal-titleP">3. ¿Puedo elegir a una conductora específica?</h6>
+                <p class="text-modal">Nuestro sistema de asignación de conductoras se basa en la disponibilidad y proximidad de las mismas en el momento de solicitar el viaje. No ofrecemos la opción de seleccionar a una conductora específica. Sin embargo, todas nuestras conductoras son mujeres capacitadas y confiables, lo que garantiza un nivel de servicio uniforme y seguro.</p>
+                <h6 class="modal-titleP">4. ¿Qué métodos de pago aceptan?</h6>
+                <p class="text-modal">Por el momento solo se aceptan los pagos en efectivo a la conductora, o existe la posibilidad de pagos virtuales a la cuenta personal de la conductora. Al finalizar el viaje, se te mostrará el monto total y podrás seleccionar la opción de pago que prefieras dialogando con la conductora </p>
+                <hr>
+                <p class="text-modal">Estas son solo algunas de las preguntas frecuentes relacionadas con nuestro servicio de transporte exclusivo para mujeres SheDrive. Si tienes alguna otra consulta, no dudes en hacérnosla llegar. ¡Estamos aquí para brindarte un transporte seguro y confiable! </p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="cajaCont">
     <aside>
         <p class="text--big"> SheDrive </p>
 
@@ -110,25 +199,251 @@
             </form>
         </div>  
         <div class="box-link">
-            <a href="javascript:void(0)">
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#agenda">
                 <i class="fa-solid fa-circle-info"></i>
-                Ayuda - Información
+                Historial
             </a>
-            <a href="javascript:void(0)">
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#preguntas">
                 <i class="fa-solid fa-circle-question"></i>
                 Preguntas Frecuentes
             </a>
-            <a href="javascript:void(0)">
-                <i class="fa-solid fa-shield"></i>
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#legalidad">
+                <i class="fa-solid fa-shield" ></i>
                 Legalidad y privacidad
             </a>
         </div>
-    </aside>    
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    const myModal = new bootstrap.Modal(document.getElementById('myModal'), options)
+    </aside>  
 
-</script>
+    <div class="formViaje">
+        <center>
+            <form id="directions-form" method="POST" action="{% url 'solicitar_viaje' %}">
+                {% csrf_token %}
+                <div class="container" style="margin-left: 15vh;">
+                    <div class="row">
+                        <div class="col">
+                            <input class="viaje" type="text" id="origin-input" name="origen" placeholder="Origen" required>
+                        </div>
+                        <div class="col">    
+                            <input class="viaje" type="text" id="destination-input" name="destino" placeholder="Destino" required>
+                        </div>
+                        <div class="col">
+                            <input type="number" id="distance-input" name="distance" value="" hidden>
+                            <input type="number" id="price-input" name="price" value="" hidden>
+                            <input type="text" id="duration-input" name="duration" value="" hidden>
+                            <input class="viaje" type="text" id="identificacion_user" name="identificacion_user" value="{{ usuaria.identificacion_usu }}" hidden>
+                            <input class="viaje" type="password" id="contraseña_user" name="contraseña_user" value="{{ usuaria.contraseña }}" hidden>
+                            <button type="submit" id="submit" class="solicitar" onclick="notificacion()">Solicitar</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+        </center> 
+        <div class="container">
+            <div class="row">
+                <div class="col-5">
+                    <div id="duration" style="margin-left: 7vh;"></div>
+                </div>
+                <div class="col-3"> 
+                    <div id="distance" ></div>
+                </div>
+                <div class="col-4"> 
+                    <div id="fuel-cost"></div>
+                </div>
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+</div>
+
+
+    
+    <!-- Compiled and minified JS -->
+    <script src="{% static 'WebApp/js/pasajera.js' %}"></script>   
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">const myModal = new bootstrap.Modal(document.getElementById('myModal'), options);</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uber-api.js@2.0.0/dist/uber-api.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHbasFaVe7CwkSTEVPDAwBoR4uYdRbtaI&callback=initMap&v=weekly" defer></script>
+
+    <!-- Estilos-->
+    <style>
+        .historial{
+            width: 137% !important;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+            border-radius: 15px !important;
+          }
+          
+          .table th,
+          .table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+            border-radius: 15px;
+            font-family: 'Ysabeau', sans-serif !important;
+            font-weight: 700;
+          }
+          
+          .table th {
+            background-color: #f2f2f2;
+            border-radius: 15px;
+            font-family: 'Ysabeau', sans-serif !important;
+            font-weight: 700;
+          }
+          
+          .table tbody tr:hover {
+            background-color: #f9f9f9;
+            border-radius: 15px;
+          }
+
+        .swal2-popup {
+            border-radius: 15px !important;
+        }
+        .swal2-popup .swal2-text {
+            font-family: 'Ysabeau', sans-serif !important;
+        }
+        .swal2-confirm {
+            background-color: #9d5a4d !important;
+            border-color: transparent !important;
+            border-radius: 15px !important;
+            font-family: 'Ysabeau', sans-serif !important;
+            font-weight: 700;
+        }    
+    </style>
+    <style>
+        .cajaCont{
+            display: flex;
+        }
+
+        .viaje{
+            font-family: 'Ysabeau', sans-serif !important;
+            font-weight: 900;
+            color: black;
+            width: 100%;
+            margin: 15px auto;
+            height: -webkit-fill-available;
+            margin-bottom: 10px;
+            border: 1px solid #e6dad15d;
+            border-radius: 15px;
+        }
+        .solicitar{
+            background-color: #9d5a4d;
+            color: rgba(255, 255, 255);
+            border: 0;
+            border-radius: 15px;
+            display: block;
+            margin: 15px auto;
+            padding: 15px 45px;
+            width: 100%;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            opacity: 1;
+            visibility: visible;
+            -webkit-transition: all 0.3s ease;
+        }
+        #duration{
+            font-family: 'Ysabeau', sans-serif !important;
+            font-weight: 900;
+        }
+        #distance, #fuel-cost{
+            font-family: 'Ysabeau', sans-serif !important;
+            font-weight: 900;
+        }
+        #map {
+            height: 75vh;
+            width: 121%;
+            padding-top: 51vh;
+            margin-left: 7vh;
+            margin-top: 2vh;
+            border-radius: 15px;
+        }
+        .text-modal{
+            font-family: 'Ysabeau', sans-serif !important;
+            color: #000 !important;
+            font-weight: 900;
+
+        }
+
+        .title-modal {
+            font-family: 'Ysabeau', sans-serif !important;
+            color: #000 !important;
+            font-weight: 900;
+            font-size: 12px;
+        }
+
+        .modal-titleP{
+            font-family: 'Ysabeau', sans-serif !important;
+            color: #673b32 !important;
+            font-weight: 900;
+        }
+        /* Estilos personalizados para el formulario */
+        .form-container {
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #e6dad15d;
+            border: 1px solid #e6dad15d;
+            border-radius: 15px;
+        }
+
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        label{
+            font-family: 'Ysabeau', sans-serif !important;
+            font-weight: 900;
+            font-size: 12px;
+
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="number"] {
+            font-family: 'Ysabeau', sans-serif !important;
+            font-weight: 900;
+            color: black;
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #e6dad15d;
+            border-radius: 15px;
+        }
+        .modal-footer{
+            padding: 1px !important;
+        }
+        .guardar-modificar{
+            margin: 15px;
+            --bs-btn-color: #fff !important;
+            --bs-btn-bg: #9d5a4d !important;
+            --bs-btn-border-color: #9d5a4d !important;
+            --bs-btn-hover-color: #fff;
+            --bs-btn-hover-bg: #9d5a4d !important;
+            --bs-btn-hover-border-color: #9d5a4d !important;
+            --bs-btn-focus-shadow-rgb: 49,132,253;
+            --bs-btn-active-color: #fff;
+            --bs-btn-active-bg: #9d5a4d !important;
+            --bs-btn-active-border-color: #9d5a4d !important;
+            --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+            --bs-btn-disabled-color: #fff;
+            --bs-btn-disabled-bg: #9d5a4d !important;
+            --bs-btn-disabled-border-color: #9d5a4d !important;
+            --bs-btn-border-radius: 15px !important;
+        }
+
+        .cancelar{
+            --bs-btn-border-radius: 15px !important;
+        }
+        .modal-content{
+            border-radius: 15px !important;
+        }
+    </style>
 
 </body>
-
 </html>

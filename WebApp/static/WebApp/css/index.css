@@ -41,12 +41,13 @@
 
 .text__background {
   font-family: 'Ysabeau', sans-serif;
+  font-weight: 700;
   position: absolute;
   left: 72px;
   bottom: -60px;
   color: rgba(0, 0, 0, 0.05);
   font-size: 170px;
-  font-weight: 700;
+  
 }
 
 .flex__item {
